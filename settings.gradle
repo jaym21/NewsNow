@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "News Now"
 include ':app'
+include ':newsAPI'
