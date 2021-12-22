@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id "dagger.hilt.android.plugin"
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -25,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -37,7 +37,7 @@ android {
 }
 
 kapt {
-    correctErrorTypes = true
+    correctErrorTypes true
 }
 
 dependencies {
@@ -55,10 +55,16 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
+    // lifecycle components
+    def lifecycle = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
+
     //retrofit and moshi converter
     def retrofit = "2.9.0"
     def moshi = '1.13.0'
-    api "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
     implementation "com.squareup.moshi:moshi:$moshi"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
@@ -66,7 +72,7 @@ dependencies {
     // coroutine
     def coroutine = "1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+    kapt "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
 
     // Room components
     def room = "2.4.0"
@@ -75,8 +81,9 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$room"
 
     //hilt
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    def hilt = '2.40.5'
+    implementation "com.google.dagger:hilt-android:$hilt"
+    kapt "com.google.dagger:hilt-compiler:$hilt"
 
     //glide
     def glide = "4.12.0"
