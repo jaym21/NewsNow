@@ -1,9 +1,11 @@
 package dev.jaym21.newsnow.data.remote.models.entities
 
 
+import androidx.room.Entity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
 data class Article(
     @Json(name = "source")
