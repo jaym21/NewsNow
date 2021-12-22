@@ -2,12 +2,15 @@ package dev.jaym21.newsnow.data.remote.models.entities
 
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
 data class Article(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     @Json(name = "source")
     val source: Source?,
     @Json(name = "author")
