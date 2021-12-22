@@ -1,6 +1,7 @@
 package dev.jaym21.newsnow.di
 
 import dagger.Provides
+import dev.jaym21.newsnow.data.remote.service.NewsAPI
 import dev.jaym21.newsnow.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -18,4 +19,8 @@ object AppModule {
             .build()
 
 
+    @Provides
+    @Singleton
+    fun provideNewsApi(retrofit: Retrofit): NewsAPI =
+        retrofit.create(NewsAPI::class.java)
 }
