@@ -63,6 +63,12 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
 
+    // Room components
+    def room = "2.4.0"
+    implementation "androidx.room:room-ktx:$room"
+    kapt "androidx.room:room-compiler:$room"
+    androidTestImplementation "androidx.room:room-testing:$room"
+
     //unit testing
     testImplementation 'junit:junit:4.13.2'
 
