@@ -51,6 +51,19 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
+    //retrofit and moshi converter
+    def retrofit = "2.9.0"
+    def moshi = '1.13.0'
+    api "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+    implementation "com.squareup.moshi:moshi:$moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
+
+    // coroutine
+    def coroutine = "1.5.2-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+
     //unit testing
     testImplementation 'junit:junit:4.13.2'
 
