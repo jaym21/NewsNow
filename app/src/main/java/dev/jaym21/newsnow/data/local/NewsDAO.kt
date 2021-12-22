@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface NewsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addArticles(article: Article)
+    suspend fun addArticles(articles: List<Article>)
 
     @Query("DELETE FROM article_table")
     suspend fun deleteAllArticles()
