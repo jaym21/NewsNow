@@ -1,9 +1,9 @@
-package dev.jaym21.newsapi.models.responses
+package dev.jaym21.newsnow.data.remote.models.responses
 
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import dev.jaym21.newsapi.models.entities.Article
+import dev.jaym21.newsnow.data.remote.models.entities.Article
 
 @JsonClass(generateAdapter = true)
 data class NewsResponse(

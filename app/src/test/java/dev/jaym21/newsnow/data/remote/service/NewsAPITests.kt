@@ -1,6 +1,7 @@
-package dev.jaym21.newsapi.service
+package dev.jaym21.newsnow.data.remote.service
 
-import dev.jaym21.newsapi.client.NewsAPIClient
+
+import dev.jaym21.newsnow.data.remote.client.NewsAPIClient
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
 import org.junit.Test

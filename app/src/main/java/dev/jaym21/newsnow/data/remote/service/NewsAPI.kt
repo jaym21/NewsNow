@@ -1,7 +1,8 @@
-package dev.jaym21.newsapi.service
+package dev.jaym21.newsnow.data.remote.service
 
-import dev.jaym21.newsapi.client.API_KEY
-import dev.jaym21.newsapi.models.responses.NewsResponse
+
+import dev.jaym21.newsnow.data.remote.models.responses.NewsResponse
+import dev.jaym21.newsnow.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,6 +18,6 @@ interface NewsAPI {
         @Query("country")
         countryCode: String = "in",
         @Query("apiKey")
-        apiKey: String = API_KEY
+        apiKey: String = Constants.API_KEY
     ): Response<NewsResponse>
 }

@@ -1,18 +1,16 @@
-package dev.jaym21.newsapi.client
+package dev.jaym21.newsnow.data.remote.client
 
-import dev.jaym21.newsapi.service.NewsAPI
+
+import dev.jaym21.newsnow.data.remote.service.NewsAPI
+import dev.jaym21.newsnow.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-const val API_KEY = "06327b2038d043118f222d4abf97fe9b"
-
 object NewsAPIClient {
-
-    private val BASE_URL = "https://newsapi.org/v2/"
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }

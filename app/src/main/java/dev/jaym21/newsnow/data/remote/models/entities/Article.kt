@@ -1,4 +1,4 @@
-package dev.jaym21.newsapi.models.entities
+package dev.jaym21.newsnow.data.remote.models.entities
 
 
 import com.squareup.moshi.Json
