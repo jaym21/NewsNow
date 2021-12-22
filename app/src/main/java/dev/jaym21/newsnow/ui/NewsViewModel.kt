@@ -17,7 +17,7 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(private val repository: NewsRepository): ViewModel() {
 
     private val _news: MutableLiveData<Resource<List<Article>>> = MutableLiveData()
-    private val news: LiveData<Resource<List<Article>>> = _news
+    val news: LiveData<Resource<List<Article>>> = _news
 
     fun getNews(category: String) = viewModelScope.launch(Dispatchers.IO) {
         val news = repository.getNews(category)
