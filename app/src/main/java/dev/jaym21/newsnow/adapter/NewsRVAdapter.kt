@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dev.jaym21.newsnow.R
 import dev.jaym21.newsnow.data.remote.models.entities.Article
 
@@ -39,5 +40,7 @@ class NewsRVAdapter: ListAdapter<Article, NewsRVAdapter.NewsViewHolder>(NewsDiff
         holder.titleView.text = currentItem.title
         if (currentItem.source?.name != null)
             holder.name.text = currentItem.source.name
+
+        Glide.with(holder.itemView.context).load(currentItem.urlToImage).into(holder.newsImage)
     }
 }
