@@ -60,7 +60,7 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
 
     // coroutine
-    def coroutine = "1.5.2-native-mt"
+    def coroutine = "1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
 
