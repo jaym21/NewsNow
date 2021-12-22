@@ -13,6 +13,9 @@ interface NewsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addArticles(article: Article)
 
-    @Query("SELECT * FROM article_table")
-    fun getAllArticles(): Flow<List<Article>>
+    @Query("DELETE FROM article_table")
+    suspend fun deleteAllArticles()
+
+    @Query("SELECT * FROM article_table category WHERE :category")
+    fun getAllArticles(category: String): Flow<List<Article>>
 }

@@ -23,5 +23,6 @@ data class Article(
     @Json(name = "publishedAt")
     val publishedAt: String?,
     @Json(name = "content")
-    val content: Any?
+    val content: String?,
+    var category: String?
 )
