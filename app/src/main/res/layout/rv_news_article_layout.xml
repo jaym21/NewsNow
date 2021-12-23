@@ -23,8 +23,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newsImage"
-        android:textSize="18sp"
-        android:textColor="#ffffff"/>
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tvName"
@@ -33,7 +32,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        android:layout_marginTop="6dp"
-        android:textColor="#fbf7f5"/>
+        android:layout_marginTop="6dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
