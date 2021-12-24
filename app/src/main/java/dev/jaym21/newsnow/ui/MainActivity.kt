@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.jaym21.newsnow.adapter.CategoryRVAdapter
 import dev.jaym21.newsnow.adapter.ICategoryRVAdapter
@@ -30,23 +31,20 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
 
         setUpArticlesRecyclerView()
 
-        viewModel.getNews("general")
+        viewModel.getNews(this, "General")
 
         //observing news response using live data in news viewModel
         viewModel.news.observe(this, Observer { response ->
             when(response) {
                 is Resource.Success -> {
-                    binding?.tvNoArticles?.visibility = View.GONE
                     binding?.progressBar?.visibility = View.GONE
                     newsAdapter.submitList(response.data?.articles)
                 }
                 is Resource.Error -> {
                     binding?.progressBar?.visibility = View.GONE
-                    binding?.tvNoArticles?.visibility = View.VISIBLE
-                    binding?.tvNoArticles?.text = response.error
+                    Snackbar.make(binding?.root!!, "${response.error}", Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
-                    binding?.tvNoArticles?.visibility = View.GONE
                     binding?.progressBar?.visibility = View.VISIBLE
                 }
             }
@@ -69,6 +67,6 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
     }
 
     override fun onCategoryClicked(category: String) {
-        viewModel.getNews(category)
+        viewModel.getNews(this, category)
     }
 }
