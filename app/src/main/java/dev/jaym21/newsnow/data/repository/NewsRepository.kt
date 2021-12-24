@@ -8,6 +8,7 @@ import dev.jaym21.newsnow.data.remote.models.responses.NewsResponse
 import dev.jaym21.newsnow.data.remote.service.NewsAPI
 import dev.jaym21.newsnow.utils.NetworkUtils
 import dev.jaym21.newsnow.utils.Resource
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -29,7 +30,7 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
 
                     if (body?.articles != null) {
 
-                        newsDAO.deleteAllArticles()
+                        newsDAO.deleteArticlesFor(category)
                         body.articles.forEach {
                             it.category = category
                             newsDAO.addArticle(it)
@@ -45,20 +46,14 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
             } else {
                 Log.d("TAGYOYO", "network false")
                 val articlesFlow = newsDAO.getAllArticles(category)
-                var articles: List<Article>? = null
                 articlesFlow.collect {
                     Log.d("TAGYOYO", "article flow collect $it")
                     if (it.isNullOrEmpty()) {
                         emit(Resource.Error("No internet connection"))
                     } else {
-                        articles = it
+                        emit(Resource.Success(NewsResponse("ok", it.size, it)))
                     }
                 }
-                Log.d("TAGYOYO", "articles $articles")
-                if (articles != null)
-                    emit(Resource.Success(NewsResponse("ok", articles?.size, articles)))
-                else
-                    emit(Resource.Error("No internet connection"))
             }
         }
     }
