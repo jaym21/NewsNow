@@ -19,6 +19,9 @@ interface NewsDAO {
     @Query("DELETE FROM article_table")
     suspend fun deleteAllArticles()
 
-    @Query("SELECT * FROM article_table category WHERE :category")
+    @Query("DELETE FROM article_table WHERE category = :category")
+    fun deleteArticlesFor(category: String)
+
+    @Query("SELECT * FROM article_table WHERE category = :category")
     fun getAllArticles(category: String): Flow<List<Article>>
 }
