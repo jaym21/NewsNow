@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvAppName"
+            android:overScrollMode="never"
             android:layout_marginTop="10dp" />
 
     </RelativeLayout>
@@ -40,6 +41,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/rlTop"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never"
         android:layout_marginTop="16dp"/>
 
     <TextView
