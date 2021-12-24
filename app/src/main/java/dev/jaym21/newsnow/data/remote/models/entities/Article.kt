@@ -10,7 +10,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Article(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     @Json(name = "source")
     val source: Source?,
     @Json(name = "author")

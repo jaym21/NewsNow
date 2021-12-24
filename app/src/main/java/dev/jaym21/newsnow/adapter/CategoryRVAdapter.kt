@@ -11,7 +11,7 @@ import dev.jaym21.newsnow.R
 
 class CategoryRVAdapter(private val categories: List<String>, private val listener: ICategoryRVAdapter): RecyclerView.Adapter<CategoryRVAdapter.CategoryViewHolder>() {
 
-    private var selectedPosition = -1
+    private var selectedPosition = 0
 
     inner class CategoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val categoryName: TextView = itemView.findViewById(R.id.tvCategoryItem)

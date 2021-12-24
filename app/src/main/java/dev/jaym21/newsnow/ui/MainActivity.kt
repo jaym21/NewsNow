@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
 
         setUpArticlesRecyclerView()
 
-        viewModel.getNews("business")
+        viewModel.getNews("general")
 
         //observing news response using live data in news viewModel
         viewModel.news.observe(this, Observer { response ->
@@ -69,6 +69,6 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
     }
 
     override fun onCategoryClicked(category: String) {
-
+        viewModel.getNews(category)
     }
 }
