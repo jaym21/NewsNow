@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/AndroidAppDevelopment/NewsNow/app/src/main/res/drawable/category_item_bg.xml" value="0.3828125" />
+        <entry key="..\:/Programming/AndroidAppDevelopment/NewsNow/app/src/main/res/drawable/category_item_unselected_bg.xml" value="0.3828125" />
         <entry key="..\:/Programming/AndroidAppDevelopment/NewsNow/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Programming/AndroidAppDevelopment/NewsNow/app/src/main/res/layout/rv_category_item_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Programming/AndroidAppDevelopment/NewsNow/app/src/main/res/layout/rv_news_article_layout.xml" value="0.36666666666666664" />
