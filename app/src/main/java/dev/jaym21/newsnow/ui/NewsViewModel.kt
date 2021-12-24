@@ -37,6 +37,8 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository):
                 Log.d("TAGYOYO", "collect ${it.data}")
                 if (it.data != null)
                     _news.postValue(Resource.Success(it.data))
+                else
+                    _news.postValue(Resource.Error("No internet connection"))
             }
     }
 }
