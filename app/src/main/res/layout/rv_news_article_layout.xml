@@ -44,7 +44,7 @@
             android:maxLines="2"
             android:ellipsize="end"
             tools:text="History is rhyming: How the new war for the future of wallets and Web 3.0 interfaces might parallel the browser wars of the early internet."
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:textColor="@color/black_alpha_70"
             android:fontFamily="@font/worksans_regular"
             android:layout_marginTop="2dp"/>
@@ -54,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Cointelegraph"
+            android:textSize="14sp"
             android:textColor="@color/black_alpha_70"
             android:fontFamily="@font/worksans_regular"
             app:layout_constraintLeft_toLeftOf="parent"

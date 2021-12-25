@@ -27,10 +27,9 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
                 if (response.isSuccessful) {
                     val body = response.body()
 
-//                    Log.d("TAGYOYO", "repo $body ")
                     if (body?.articles != null) {
-
-                        newsDAO.deleteArticlesFor(category)
+                        if (pageNo == 1)
+                            newsDAO.deleteArticlesFor(category)
                         body.articles.forEach {
                             it.category = category
                             newsDAO.addArticle(it)
