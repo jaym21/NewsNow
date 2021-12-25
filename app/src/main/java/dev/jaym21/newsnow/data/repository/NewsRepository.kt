@@ -19,11 +19,9 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
     //getting dao from database
     private val newsDAO = database.getNewsDAO()
 
-    fun getNews(context: Context, category: String): Flow<Resource<NewsResponse>> {
-        Log.d("TAGYOYO", "getNews: repo")
+    fun getNews(context: Context, category: String, pageNo: Int): Flow<Resource<NewsResponse>> {
         return flow {
             if (NetworkUtils.getNetworkStatus(context)) {
-                Log.d("TAGYOYO", "network true")
                 val response = api.getTopHeadlines(category)
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -44,10 +42,8 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
                     emit(Resource.Error("Server Error"))
                 }
             } else {
-                Log.d("TAGYOYO", "network false")
                 val articlesFlow = newsDAO.getAllArticles(category)
                 articlesFlow.collect {
-                    Log.d("TAGYOYO", "article flow collect $it")
                     if (it.isNullOrEmpty()) {
                         emit(Resource.Error("No internet connection"))
                     } else {

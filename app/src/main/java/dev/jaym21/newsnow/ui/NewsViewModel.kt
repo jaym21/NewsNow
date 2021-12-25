@@ -21,20 +21,17 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository):
     private val _news: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     val news: LiveData<Resource<NewsResponse>> = _news
 
-    fun getNews(context: Context, category: String) = viewModelScope.launch {
+    fun getNews(context: Context, category: String, pageNo: Int) = viewModelScope.launch {
         _news.postValue(Resource.Loading())
-        repository.getNews(context, category)
+        repository.getNews(context, category, pageNo)
             .onStart {
                 Resource.Loading<NewsResponse>()
-                Log.d("TAGYOYO", "getNews: onStart")
             }
             .flowOn(Dispatchers.IO)
             .catch {
                 _news.postValue(Resource.Error("No internet connection"))
-                Log.d("TAGYOYO", "getNews: catch")
             }
             .collect {
-                Log.d("TAGYOYO", "collect ${it.data}")
                 if (it.data != null)
                     _news.postValue(Resource.Success(it.data))
                 else

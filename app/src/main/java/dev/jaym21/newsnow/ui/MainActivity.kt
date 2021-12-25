@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
     private val newsAdapter = NewsRVAdapter()
     private val viewModel: NewsViewModel by viewModels()
     private val categories = listOf("General", "Business", "Entertainment", "Sports", "Health", "Science", "Technology")
+    private var currentPage = 1
+    private var itemsDisplayed = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
 
         setUpArticlesRecyclerView()
 
-        viewModel.getNews(this, "General")
+        viewModel.getNews(this, "General", 1)
 
         //observing news response using live data in news viewModel
         viewModel.news.observe(this, Observer { response ->
@@ -67,6 +69,6 @@ class MainActivity : AppCompatActivity(), ICategoryRVAdapter {
     }
 
     override fun onCategoryClicked(category: String) {
-        viewModel.getNews(this, category)
+        viewModel.getNews(this, category, 1)
     }
 }
