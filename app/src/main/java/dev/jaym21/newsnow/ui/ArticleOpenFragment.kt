@@ -1,5 +1,6 @@
 package dev.jaym21.newsnow.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,7 +33,6 @@ class ArticleOpenFragment : Fragment() {
         //initializing navController
         navController = Navigation.findNavController(view)
 
-
         //getting the article passed as argument from other fragment
         val article = arguments?.getSerializable("OpenArticle") as Article
 
@@ -45,6 +45,15 @@ class ArticleOpenFragment : Fragment() {
         } else {
             //back to news fragment if link to article is null
             navController.popBackStack()
+        }
+
+        binding?.fabShare?.setOnClickListener {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.type="text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share this article...")
+            shareIntent.putExtra(Intent.EXTRA_TEXT, article.url)
+            startActivity(shareIntent)
         }
     }
 
