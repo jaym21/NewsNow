@@ -37,12 +37,6 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        val newsFragment = NewsFragment()
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fragmentContainerView, newsFragment)
-        fragmentTransaction.commit()
-
     }
 
     override fun onDestroy() {
