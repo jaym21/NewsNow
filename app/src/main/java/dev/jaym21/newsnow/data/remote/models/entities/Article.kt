@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
@@ -28,4 +29,4 @@ data class Article(
     @Json(name = "content")
     val content: String?,
     var category: String?
-)
+): Serializable
