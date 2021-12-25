@@ -8,7 +8,8 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp">
+    android:layout_marginEnd="5dp"
+    android:id="@+id/llNewsArticleRoot">
 
     <ImageView
         android:id="@+id/newsImage"

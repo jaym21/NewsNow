@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -15,20 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import dev.jaym21.newsnow.R
 import dev.jaym21.newsnow.adapter.CategoryRVAdapter
 import dev.jaym21.newsnow.adapter.ICategoryRVAdapter
+import dev.jaym21.newsnow.adapter.INewsRVAdapter
 import dev.jaym21.newsnow.adapter.NewsRVAdapter
+import dev.jaym21.newsnow.data.remote.models.entities.Article
 import dev.jaym21.newsnow.databinding.FragmentNewsBinding
 import dev.jaym21.newsnow.utils.Constants
 import dev.jaym21.newsnow.utils.DataStoreManager
 import dev.jaym21.newsnow.utils.Resource
 
 @AndroidEntryPoint
-class NewsFragment : Fragment(), ICategoryRVAdapter {
+class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
 
     private var binding: FragmentNewsBinding? = null
-    private val newsAdapter = NewsRVAdapter()
     private lateinit var navController: NavController
+    private val newsAdapter = NewsRVAdapter(this)
     private lateinit var viewModel: NewsViewModel
     private val categories = listOf("General", "Business", "Entertainment", "Sports", "Health", "Science", "Technology")
     private var currentCategory = "General"
@@ -160,5 +164,10 @@ class NewsFragment : Fragment(), ICategoryRVAdapter {
         itemsDisplayed = 0
         currentPage = 1
         viewModel.getNews(requireContext(), category, 1, true)
+    }
+
+    override fun onArticleClicked(article: Article) {
+        val bundle = bundleOf("OpenArticle" to article)
+        navController.navigate(R.id.action_newsFragment_to_articleOpenFragment, bundle)
     }
 }

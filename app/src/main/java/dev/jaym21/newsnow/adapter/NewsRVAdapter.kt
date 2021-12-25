@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import dev.jaym21.newsnow.R
 import dev.jaym21.newsnow.data.remote.models.entities.Article
 
-class NewsRVAdapter: ListAdapter<Article, NewsRVAdapter.NewsViewHolder>(NewsDiffUtil()) {
+class NewsRVAdapter(private val listener: INewsRVAdapter): ListAdapter<Article, NewsRVAdapter.NewsViewHolder>(NewsDiffUtil()) {
 
     class NewsDiffUtil: DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -31,6 +32,7 @@ class NewsRVAdapter: ListAdapter<Article, NewsRVAdapter.NewsViewHolder>(NewsDiff
         val description: TextView = itemView.findViewById(R.id.tvDes)
         val image: ImageView = itemView.findViewById(R.id.newsImage)
         val name: TextView = itemView.findViewById(R.id.tvName)
+        val root: LinearLayout = itemView.findViewById(R.id.llNewsArticleRoot)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -45,5 +47,13 @@ class NewsRVAdapter: ListAdapter<Article, NewsRVAdapter.NewsViewHolder>(NewsDiff
             holder.name.text = currentItem.source.name
 
         Glide.with(holder.itemView.context).load(currentItem.urlToImage).transform(CenterCrop(), RoundedCorners(30)).into(holder.image)
+
+        holder.root.setOnClickListener {
+            listener.onArticleClicked(currentItem)
+        }
     }
+}
+
+interface INewsRVAdapter {
+    fun onArticleClicked(article: Article)
 }
