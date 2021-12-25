@@ -6,6 +6,7 @@ import dev.jaym21.newsnow.data.local.NewsDatabase
 import dev.jaym21.newsnow.data.remote.models.entities.Article
 import dev.jaym21.newsnow.data.remote.models.responses.NewsResponse
 import dev.jaym21.newsnow.data.remote.service.NewsAPI
+import dev.jaym21.newsnow.utils.DataStoreManager
 import dev.jaym21.newsnow.utils.NetworkUtils
 import dev.jaym21.newsnow.utils.Resource
 import kotlinx.coroutines.delay
@@ -22,10 +23,11 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
     fun getNews(context: Context, category: String, pageNo: Int): Flow<Resource<NewsResponse>> {
         return flow {
             if (NetworkUtils.getNetworkStatus(context)) {
-                val response = api.getTopHeadlines(category)
+                val response = api.getTopHeadlines(category, pageNo)
                 if (response.isSuccessful) {
                     val body = response.body()
 
+//                    Log.d("TAGYOYO", "repo $body ")
                     if (body?.articles != null) {
 
                         newsDAO.deleteArticlesFor(category)
@@ -33,7 +35,8 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
                             it.category = category
                             newsDAO.addArticle(it)
                         }
-
+                        //saving total articles in response to datastore
+                        DataStoreManager(context).saveTotalArticles(body.totalResults!!)
                         emit(Resource.Success(body))
                     } else {
                         emit(Resource.Error("No response from server"))

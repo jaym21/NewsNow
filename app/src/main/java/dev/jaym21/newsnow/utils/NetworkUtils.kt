@@ -23,8 +23,6 @@ class NetworkUtils {
                     isConnected = true
                 }
             }
-
-            Log.d("TAGYOYO", "network check $isConnected")
             return isConnected
         }
     }
