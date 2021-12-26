@@ -14,9 +14,6 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        //TODO: Notification using work manager
-        //TODO: Light Dark theme switch
     }
 
     override fun onDestroy() {

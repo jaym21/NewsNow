@@ -70,7 +70,7 @@ class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
 
         setUpArticlesRecyclerView()
 
-        viewModel.getNews(requireContext(), "General", 1, true)
+        viewModel.getNews(requireContext(), currentCategory, 1, true)
 
         //observing news response using live data in news viewModel
         viewModel.news.observe(viewLifecycleOwner, Observer { response ->
@@ -131,6 +131,7 @@ class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
 
     override fun onResume() {
         super.onResume()
+
         DataStoreManager(requireContext()).isThemeDark.asLiveData().observe(viewLifecycleOwner) { isThemeDark ->
 
             //changing switch state using isThemeDark boolean stored in DataStore
