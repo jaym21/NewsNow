@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +29,7 @@ import dev.jaym21.newsnow.databinding.FragmentNewsBinding
 import dev.jaym21.newsnow.utils.Constants
 import dev.jaym21.newsnow.utils.DataStoreManager
 import dev.jaym21.newsnow.utils.Resource
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
@@ -35,6 +39,7 @@ class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
     private val newsAdapter = NewsRVAdapter(this)
     private lateinit var viewModel: NewsViewModel
     private val categories = listOf("General", "Business", "Entertainment", "Sports", "Health", "Science", "Technology")
+    private val categoryAdapter = CategoryRVAdapter(categories, this)
     private var currentCategory = "General"
     private var currentPage = 1
     private var itemsDisplayed = 0
@@ -95,6 +100,67 @@ class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
                 }
             }
         })
+
+        binding?.switchTheme?.setOnCheckedChangeListener { _, isChecked ->
+            val theme = if (isChecked) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+
+            if (isChecked) {
+                binding?.rlTop?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black_bg))
+                binding?.tvAppName?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            } else {
+                binding?.rlTop?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.off_white))
+                binding?.tvAppName?.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+
+            lifecycleScope.launch {
+                if (isChecked)
+                    DataStoreManager(requireContext()).saveIsThemeDark(true)
+                else
+                    DataStoreManager(requireContext()).saveIsThemeDark(false)
+            }
+
+            AppCompatDelegate.setDefaultNightMode(theme)
+            categoryAdapter.notifyDataSetChanged()
+            newsAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        DataStoreManager(requireContext()).isThemeDark.asLiveData().observe(viewLifecycleOwner) { isThemeDark ->
+
+            //changing switch state using isThemeDark boolean stored in DataStore
+            binding?.switchTheme?.isChecked = isThemeDark
+
+            val theme = if (isThemeDark) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+
+            if (isThemeDark) {
+                binding?.rlTop?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black_bg))
+                binding?.tvAppName?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            } else {
+                binding?.rlTop?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.off_white))
+                binding?.tvAppName?.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+
+            lifecycleScope.launch {
+                if (isThemeDark)
+                    DataStoreManager(requireContext()).saveIsThemeDark(true)
+                else
+                    DataStoreManager(requireContext()).saveIsThemeDark(false)
+            }
+
+            AppCompatDelegate.setDefaultNightMode(theme)
+            categoryAdapter.notifyDataSetChanged()
+            newsAdapter.notifyDataSetChanged()
+        }
     }
 
     //implementing pagination
@@ -144,7 +210,6 @@ class NewsFragment : Fragment(), ICategoryRVAdapter, INewsRVAdapter {
     }
 
     private fun setUpCategoriesRecyclerView() {
-        val categoryAdapter = CategoryRVAdapter(categories, this)
         binding?.rvCategory?.apply {
             adapter = categoryAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

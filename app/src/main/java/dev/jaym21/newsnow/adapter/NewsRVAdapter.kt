@@ -1,11 +1,13 @@
 package dev.jaym21.newsnow.adapter
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +49,24 @@ class NewsRVAdapter(private val listener: INewsRVAdapter): ListAdapter<Article, 
             holder.name.text = currentItem.source.name
 
         Glide.with(holder.itemView.context).load(currentItem.urlToImage).transform(CenterCrop(), RoundedCorners(30)).into(holder.image)
+
+        when(holder.itemView.context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                holder.description.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white_alpha_70))
+                holder.name.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white_alpha_85))
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+                holder.description.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+                holder.name.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+            }
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
+                holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+                holder.description.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+                holder.name.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+            }
+        }
 
         holder.root.setOnClickListener {
             listener.onArticleClicked(currentItem)

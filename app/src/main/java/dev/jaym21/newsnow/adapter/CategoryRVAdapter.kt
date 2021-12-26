@@ -1,6 +1,7 @@
 package dev.jaym21.newsnow.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,12 +38,34 @@ class CategoryRVAdapter(private val categories: List<String>, private val listen
             notifyDataSetChanged()
         }
 
-        if (selectedPosition == position) {
-            holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
-            holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_selected_bg)
-        } else {
-            holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
-            holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_unselected_bg)
+        when(holder.itemView.context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                if (selectedPosition == position) {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_selected_bg)
+                } else {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white_alpha_60))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_unselected_dark_bg)
+                }
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                if (selectedPosition == position) {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_selected_bg)
+                } else {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_unselected_bg)
+                }
+            }
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
+                if (selectedPosition == position) {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_selected_bg)
+                } else {
+                    holder.categoryName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
+                    holder.categoryName.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.category_item_unselected_bg)
+                }
+            }
         }
     }
 
