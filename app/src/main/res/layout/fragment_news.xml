@@ -18,12 +18,24 @@
             android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/worksans_bold"
             android:text="News Now"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            android:fontFamily="@font/worksans_bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp" />
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_theme_thumb_selector"
+            app:track="@drawable/switch_theme_track"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="5dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory"
