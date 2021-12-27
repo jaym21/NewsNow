@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_share"
         app:maxImageSize="20dp"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/red_500"
         app:tint="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
