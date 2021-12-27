@@ -2,7 +2,7 @@
   <p align="center"><img src="screenshots/launcher_icon.jpg" height="300" /></p>
 <br/>
 
-## Features
+## Features 💡
 - News Now is an Android app to read news.
 - News are available in 7 categories which are General, Business, Entertainment, Sports, Health, Science and Technology.
 - App theme can be changed between light and dark mode using a simple switch.
@@ -10,7 +10,7 @@
 - News article link can be shared to other apps. 
 - News are cached using room database, so when app is launched with no internet cached news is displayed.
 
-## Screenshots
+## Screenshots 📸
 </br>
 
 |   Light Mode 🌞  |   Dark Mode 🌑   |   News Article Open In App 
@@ -39,5 +39,5 @@
 - [Glide](https://github.com/bumptech/glide) - Glide is a fast and efficient open source media management and image loading framework for Android
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android
 
-## Credits
+## Credits 📖
 - [News API](https://newsapi.org/) is used to get all the news.
