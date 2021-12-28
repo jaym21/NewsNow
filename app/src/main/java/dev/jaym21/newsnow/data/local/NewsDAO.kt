@@ -23,5 +23,8 @@ interface NewsDAO {
     fun deleteArticlesFor(category: String)
 
     @Query("SELECT * FROM article_table WHERE category = :category")
-    fun getAllArticles(category: String): Flow<List<Article>>
+    fun getAllArticlesUsingCategory(category: String): Flow<List<Article>>
+
+    @Query("SELECT * FROM article_table")
+    fun getAllArticles(): Flow<List<Article>>
 }

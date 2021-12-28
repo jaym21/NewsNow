@@ -1,15 +1,12 @@
 package dev.jaym21.newsnow.data.repository
 
 import android.content.Context
-import android.util.Log
 import dev.jaym21.newsnow.data.local.NewsDatabase
-import dev.jaym21.newsnow.data.remote.models.entities.Article
 import dev.jaym21.newsnow.data.remote.models.responses.NewsResponse
 import dev.jaym21.newsnow.data.remote.service.NewsAPI
 import dev.jaym21.newsnow.utils.DataStoreManager
 import dev.jaym21.newsnow.utils.NetworkUtils
 import dev.jaym21.newsnow.utils.Resource
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -44,7 +41,7 @@ class NewsRepository @Inject constructor(private val api: NewsAPI, private val d
                     emit(Resource.Error("Server Error"))
                 }
             } else {
-                val articlesFlow = newsDAO.getAllArticles(category)
+                val articlesFlow = newsDAO.getAllArticlesUsingCategory(category)
                 articlesFlow.collect {
                     if (it.isNullOrEmpty()) {
                         emit(Resource.Error("No internet connection"))
